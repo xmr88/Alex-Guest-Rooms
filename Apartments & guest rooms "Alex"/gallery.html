@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Hotel Gallery</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.1.2/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Include Font Awesome for star icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    
+    <style>
+        .overlay {
+            z-index: 1000;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .overlay-content {
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        .prev-button, .next-button, .close-button {
+            position: absolute;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 2em;
+            cursor: pointer;
+        }
+
+        .prev-button {
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .next-button {
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .close-button {
+            top: 10px;
+            right: 10px;
+        }
+        .burger-menu-icon {
+            font-size: 24px;
+            cursor: pointer;
+        }
+        @media screen and (max-width: 768px) {
+            .header-container {
+                position: relative;
+            }
+
+            #menu {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%; /* Positioned right below the header */
+                left: 0;
+                width: 100%;
+                background: white;
+                z-index: 10;
+                padding: 1rem 0; /* Add padding for spacing */
+                box-shadow: 0 8px 6px -6px gray; /* Optional: Adds a shadow for better visual separation */
+            }
+
+            #menu a {
+                margin: 0.5rem 0; /* More space between nav items */
+                text-align: center; /* Center align the text */
+            }
+
+            #overlay {
+                display: none;
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: white; /* Changed to white */
+                opacity: 0.95; /* Slightly transparent to obscure the heading */
+                z-index: 9;
+            }
+
+            .open #menu, .open #overlay {
+                display: block;
+            }
+
+            /* Hide the header title when the menu is open */
+            .open #header-title {
+                display: none;
+            }
+            .open #menu a {
+                /* Other existing styles for #menu a... */
+                border: 1px solid; /* Add border */
+                border-color: inherit; /* Border color same as text color */
+                padding: 5px; /* Add some padding inside the border */
+                border-radius: 5px; /* Optional: for rounded corners */
+            }
+            /* Style for the 'X' icon */
+            #burger .fa-times {
+                display: none;
+            }
+
+            /* Show 'X' icon when the menu is open */
+            .open #burger .fa-bars {
+                display: none;
+            }
+            .open #burger .fa-times {
+                display: block;
+            }
+            /* Other existing styles... */
+
+            .open #menu a {
+                display: block; /* Ensure links are block-level for spacing */
+                margin: 10px auto; /* 10px vertical margin, centered horizontally */
+            }
+            /* Other existing styles... */
+
+            .open .social-links {
+                display: flex;
+                justify-content: center; /* Center the logos */
+             
+        }
+    }
+    </style>
+
+</head>
+<body>
+
+    <header class="bg-white border-b header-container">
+        <div class="container mx-auto px-4 py-4">
+            <nav class="flex flex-col md:flex-row justify-between items-center">
+                <div class="flex justify-between items-center w-full md:w-auto">
+                    <h1 class="text-xl md:text-3xl font-bold mb-4 md:mb-0" id="header-title">Апартаменти и Стаи за гости - "Алекс"</h1>
+                    <!-- Modified Burger Menu Icon -->
+                    <div id="burger" class="md:hidden cursor-pointer">
+                        <i class="fas fa-bars"></i>
+                        <i class="fas fa-times hidden"></i> <!-- X Icon -->
+                    </div>
+                </div>
+                <!-- Overlay -->
+                <div id="overlay" class="header-overlay"></div>
+                <!-- Navigation Links -->
+                <div class="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4" id="menu">
+                    <a href="index.html" class="text-gray-700 hover:text-gray-900">Начало</a>
+                    <a href="#gallery" class="text-gray-700 hover:text-gray-900">Галерия</a>
+                    <a href="#amenities" class="text-gray-700 hover:text-gray-900">Удобства</a>
+                    <a href="#booking" class="text-gray-700 hover:text-gray-900">Резервирай</a>
+                    <div class="social-links px-5">
+                        <!-- Facebook Link -->
+                        <a href="https://www.facebook.com/Apartments-and-guest-rooms-Alex-%D0%90%D0%BF%D0%B0%D1%80%D1%82%D0%B0%D0%BC%D0%B5%D0%BD%D1%82%D0%B8-%D0%B8-%D1%81%D1%82%D0%B0%D0%B8-%D0%B7%D0%B0-%D0%B3%D0%BE%D1%81%D1%82%D0%B8-%D0%90%D0%BB%D0%B5%D0%BA%D1%81-100918492648690" class="text-gray-700 hover:text-gray-900">
+                            <i class="px-5 fab fa-facebook-f"></i>
+                        </a>
+                        <!-- Instagram Link -->
+                        <a href="https://instagram.com/alexguest_rooms?igshid=YmMyMTA2M2Y=" class="text-gray-700 hover:text-gray-900">
+                            <i class="px-5 fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+  <div class="container mx-auto mt-4 p-4">
+    <div class="flex items-center mb-4">
+      <div class="text-yellow-400 text-lg">
+        <!-- Star ratings will be placed here -->
+        <span class="fas fa-star"></span> 
+        <span class="fas fa-star"></span> 
+        <span class="fas fa-star"></span> 
+        <span class="fas fa-star"></span> 
+        <span class="fas fa-star"></span> 
+        <span class="ml-2 text-gray-800 text-xl font-semibold"></span>
+
+      </div>
+      <div class="ml-2">
+        <p class="text-sm text-gray-600">Базирано на общо 79 ревюта</p>
+      </div>
+    </div>
+    <h2 class="text-3xl font-bold mb-2"></h2>
+    <a href="https://www.google.com/maps/place/Апартаменти+и+стаи+за+гости+-+%22Алекс%22/@41.6329503,24.6991547,17z/data=!4m6!3m5!1s0x4c5beb952fb572bf:0x304fa40262366fba!8m2!3d41.6329503!4d24.6991547!16s%2Fg%2F11jzxmrg4k?entry=ttu"><p class="mb-4"> <i class="fas fa-map-marker-alt"></i> Пампорово, ул. 19, 4871 Пампорово</p></a>
+    <!-- Image gallery will be placed here -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-4" id="gallery">
+        <!-- Larger image -->
+            <img onclick="openModal(this)" src="#" alt="Main View" class="lg:col-span-6 w-full h-auto rounded-lg cursor-pointer">
+            
+            <!-- Two smaller images, now the same size as the larger one -->
+            <div class="lg:col-span-3 w-full h-auto rounded-lg cursor-pointer">
+                <img onclick="openModal(this)" src="#" alt="Side View" class="w-full h-full object-cover rounded-lg cursor-pointer">
+            </div>
+            <div class="lg:col-span-3 w-full h-auto rounded-lg cursor-pointer">
+                <img onclick="openModal(this)" src="#" alt="Side View 2" class="w-full h-full object-cover rounded-lg cursor-pointer">
+            </div>
+              <!-- Five smaller images below the larger image and the two side images -->
+            <img onclick="openModal(this)" src="#" alt="Additional View" class="col-span-6 md:col-span-2 object-cover h-48 w-full rounded-lg cursor-pointer">
+            <!-- ... (three more images with the same class) ... -->
+            <img onclick="openModal(this)" src="#" alt="Additional View 4" class="col-span-6 md:col-span-2 object-cover h-48 w-full rounded-lg cursor-pointer">
+            <img onclick="openModal(this)" src="#" alt="Additional View 4" class="col-span-6 md:col-span-2 object-cover h-48 w-full rounded-lg cursor-pointer">
+            <img onclick="openModal(this)" src="#" alt="Additional View 4" class="col-span-6 md:col-span-2 object-cover h-48 w-full rounded-lg cursor-pointer">
+            <img onclick="openModal(this)" src="#" alt="Additional View 4" class="col-span-6 md:col-span-2 object-cover h-48 w-full rounded-lg cursor-pointer">
+            
+            <!-- Last image indicating more images -->
+            <img onclick="openModal(this)" src="#" alt="Additional View 4" class="col-span-6 md:col-span-2 object-cover h-48 w-full rounded-lg cursor-pointer">
+        </div>
+      
+        <div class="overlay hidden fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center">
+            <button class="prev-button absolute left-0 text-white text-4xl">&laquo;</button>
+            <img class="overlay-content" src="" alt="Full Screen View">
+            <button class="next-button absolute right-0 text-white text-4xl">&raquo;</button>
+            <button class="close-button absolute top-0 right-0 text-white text-4xl m-4">&times;</button>
+        </div>
+
+        <!-- Room Information Section -->
+        <div class="mt-8 px-4" id="amenities">
+            <h2 class="text-2xl font-bold mb-4 text-center">Удобства</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 text-center">
+                    <!-- Individual Amenity Items -->
+                <div class="flex items-center justify-center border p-4 rounded-lg bg-white shadow">
+                    <i class="fas fa-wifi text-lg"></i>
+                    <span class="ml-2">Безплатен WiFi</span>
+                </div>
+
+                <div class="flex items-center justify-center border p-4 rounded-lg bg-white shadow">
+                    <i class="fas fa-coffee text-lg"></i>
+                    <span class="ml-2">Кафе машина</span>
+                </div>
+
+                <div class="flex items-center justify-center border p-4 rounded-lg bg-white shadow">
+                    <i class="fas fa-tv text-lg"></i>
+                    <span class="ml-2">Телевизор</span>
+                </div>
+
+                <div class="flex items-center justify-center border p-4 rounded-lg bg-white shadow">
+                    <i class="fas fa-parking text-lg"></i>
+                    <span class="ml-2">Безплатен Паркинг</span>
+                </div>
+
+                <div id="fireplaceInfo" class="flex items-center justify-center border p-4 rounded-lg bg-white shadow">
+                    <i class="fas fa-fire text-lg"></i>
+                    <span class="ml-2">Камина</span>
+                </div>
+
+                <div id="kitchenInfo" class="flex items-center justify-center border p-4 rounded-lg bg-white shadow">
+                    <i class="fas fa-utensils text-lg"></i>
+                    <span class="ml-2">Кухня</span>
+                </div>
+
+                <!-- Balcony Element Initially Hidden -->
+                <div id="balconyInfo" class="flex items-center justify-center border p-4 rounded-lg bg-white shadow" style="display: none;">
+                    <i class="fas fa-tree text-lg"></i>
+                    <span class="ml-2">Балкон</span>
+                </div>
+                
+                <!-- Second Row elements -->
+                <div class="flex items-center justify-center border p-4 rounded-lg bg-white shadow">
+                    <i class="fas fa-mountain"></i>
+                    <span class="ml-2">Гледка към планината</span>
+                </div>
+
+                <div class="flex items-center justify-center border p-4 rounded-lg bg-white shadow">
+                    <i class="fas fa-paw"></i>
+                    <span class="ml-2">Разрешени любимци</span>
+                </div>
+
+                <div class="flex items-center justify-center border p-4 rounded-lg bg-white shadow">
+                    <i class="fas fa-thermometer-half"></i>
+                    <span class="ml-2">Отопление</span>
+                </div>
+
+                <div class="flex items-center justify-center border p-4 rounded-lg bg-white shadow">
+                    <i class="fas fa-skiing"></i>
+                    <span class="ml-2">500м от пистите</span>
+                </div>
+
+                <div class="flex items-center justify-center border p-4 rounded-lg bg-white shadow">
+                    <i class="fas fa-utensils"></i>
+                    <span class="ml-2">900м от ресторанти</span>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Optional descriptive text -->
+        <p class="py-5 mt-4 text-gray-600" style="text-align: center;">
+            Добре дошли в нашите изискани частни апартаменти в идиличния курорт Пампорово, където комфортът среща удобството сред спокойната красота на Родопите. Всеки апартамент е обмислено проектиран, за да предложи луксозна, но уютна атмосфера, гарантираща запомнящо се преживяване. Насладете се на елегантно обзаведените пространства, предлагащи модерни удобства и възхитителни гледки към планината. <br><br> Разбирайки нуждите на съвременния пътешественик, ние с гордост приемаме разнообразие от методи на плащане, включително „Revolut“, „PayPal“ и „Криптовалута“, осигурявайки Ваше удобство и предлагайки безпроблемно преживяване при транзакциите! Независимо дали сте тук за вълнуващи ски приключения или спокойни разходки сред природата, нашите апартаменти в Пампорово обещават престой, който е толкова лесен, колкото и очарователен!
+        </p>
+        
+        <div class="py-10"> <!-- Added padding at the top and bottom -->
+            <h2 class="text-2xl font-bold mb-4 text-center">Разгледайте и другите ни апартаменти и студия!</h2>
+            <div class="flex overflow-x-auto py-4 space-x-4">
+                <!-- Apartment Block for Студио А18 -->
+                <div class="flex-none w-60 relative cursor-pointer" onclick="setSelectedRoom('Студио А18')">
+                    <div class="w-full h-48 bg-gray-200 overflow-hidden relative">
+                        <img src="rooms/A18/1D4DD7B7-D1D9-4641-A014-9B64548D2667.JPEG" alt="Студио А18" class="absolute inset-0 w-full h-full object-cover">
+                    </div>
+                    <div class="absolute inset-0 bg-black bg-opacity-40 backdrop-blur-sm flex flex-col justify-center items-center">
+                        <h3 class="text-lg font-semibold text-white">Студио А18</h3>
+                    </div>
+                </div>
+
+                <!-- ... other 6 apartment blocks ... -->
+                <div class="flex-none w-60 relative cursor-pointer" onclick="setSelectedRoom('Студио А25')">
+                    <div class="w-full h-48 bg-gray-200 overflow-hidden relative">
+                        <img src="rooms/A25/79E07EAB-4CC6-452B-BAA9-607CFB06AE35.JPEG" alt="Студио А25" class="absolute inset-0 w-full h-full object-cover">
+                    </div>
+                    <div class="absolute inset-0 bg-black bg-opacity-40 backdrop-blur-sm flex flex-col justify-center items-center">
+                        <h3 class="text-lg font-semibold text-white">Студио А25</h3>
+                    </div>
+                </div> 
+                
+                <div class="flex-none w-60 relative cursor-pointer" onclick="setSelectedRoom('Студио A28a')">
+                    <div class="w-full h-48 bg-gray-200 overflow-hidden relative">
+                        <img src="rooms/A28a/47E3CE1E-F3C8-4507-B1EB-535D58BA61FE.JPEG" alt="Студио A28a" class="absolute inset-0 w-full h-full object-cover">
+                    </div>
+                    <div class="absolute inset-0 bg-black bg-opacity-40 backdrop-blur-sm flex flex-col justify-center items-center">
+                        <h3 class="text-lg font-semibold text-white">Студио A28a</h3>
+                    </div>
+                </div>  
+                
+                <div class="flex-none w-60 relative cursor-pointer" onclick="setSelectedRoom('Апартамент А2')">
+                    <div class="w-full h-48 bg-gray-200 overflow-hidden relative">
+                        <img src="rooms/A2/BB4F84BB-1FE6-4CAA-AE65-E868C3AAC594.JPEG" alt="Апартамент А2" class="absolute inset-0 w-full h-full object-cover">
+                    </div>
+                    <div class="absolute inset-0 bg-black bg-opacity-40 backdrop-blur-sm flex flex-col justify-center items-center">
+                        <h3 class="text-lg font-semibold text-white">Апартамент А2</h3>
+                    </div>
+                </div>
+
+                <div class="flex-none w-60 relative cursor-pointer" onclick="setSelectedRoom('Апартамент A14б')">
+                    <div class="w-full h-48 bg-gray-200 overflow-hidden relative">
+                        <img src="rooms/A14b/426397962.jpg" alt="Апартамент A14б" class="absolute inset-0 w-full h-full object-cover">
+                    </div>
+                    <div class="absolute inset-0 bg-black bg-opacity-40 backdrop-blur-sm flex flex-col justify-center items-center">
+                        <h3 class="text-lg font-semibold text-white">Апартамент A14б</h3>
+                    </div>
+                </div>
+
+                <div class="flex-none w-60 relative cursor-pointer" onclick="setSelectedRoom('Студио Б22')">
+                    <div class="w-full h-48 bg-gray-200 overflow-hidden relative">
+                        <img src="rooms/B22/515489950.jpg" alt="Студио Б22" class="absolute inset-0 w-full h-full object-cover">
+                    </div>
+                    <div class="absolute inset-0 bg-black bg-opacity-40 backdrop-blur-sm flex flex-col justify-center items-center">
+                        <h3 class="text-lg font-semibold text-white">Студио Б22</h3>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        
+        
+        <!-- Reservation Request Section -->
+        <div id="booking" class="mt-8 px-4 py-4 bg-gray-100 rounded-lg">
+            <h2 class="text-2xl font-bold mb-4 text-center">Резервирайте вашата почивка!</h2>
+            <form id="reservationForm" class="max-w-lg mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
+                    <!-- Date Fields -->
+                    <div>
+                        <label for="checkin-date" class="block text-sm font-medium text-gray-700">Пристигане</label>
+                        <input type="date" id="checkin-date" name="checkin" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required>
+                    </div>
+                    <div>
+                        <label for="checkout-date" class="block text-sm font-medium text-gray-700">Напускане</label>
+                        <input type="date" id="checkout-date" name="checkout" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required>
+                    </div>
+
+                    <!-- Number Fields -->
+                    <div>
+                        <label for="adults" class="block text-sm font-medium text-gray-700">Възрастни</label>
+                        <input type="number" id="adults" name="adults" min="1" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required>
+                    </div>
+                    <div>
+                        <label for="children" class="block text-sm font-medium text-gray-700">Деца</label>
+                        <input type="number" id="children" name="children" min="0" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm">
+                    </div>
+
+                    <!-- Name, Email, Phone Number Fields -->
+                    <div class="md:col-span-2">
+                        <label for="name" class="block text-sm font-medium text-gray-700">Име и Фамилия</label>
+                        <input type="text" id="name" name="name" pattern="[a-zA-Z\s]+" title="Name should contain only letters and spaces" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required>
+                    </div>
+                    <div class="md:col-span-2">
+                        <label for="email" class="block text-sm font-medium text-gray-700">Имейл</label>
+                        <input type="email" id="email" name="email" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required>
+                    </div>
+                    <div class="md:col-span-2">
+                        <label for="phone" class="block text-sm font-medium text-gray-700">Телефонен номер</label>
+                        <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" title="Phone number should be 10 digits" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required>
+                    </div>
+
+                    <!-- Apartment Selection Dropdown -->
+                    <div class="md:col-span-2">
+                        <label for="apartment-selection" class="block text-sm font-medium text-gray-700">Изберете апартамент</label>
+                        <select id="apartment-selection" name="apartment" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" required>
+                            <option value="">Изберете апартамент</option>
+                            <!-- Options... -->
+                            <option value="">Изберете апартамент</option>
+                            <option value="Студио А18">Студио А18</option>
+                            <option value="Студио А25">Студио А25</option>
+                            <option value="Студио А28а">Студио A28a</option>
+                            <option value="Апартамент А2">Апартамент А2</option>
+                            <option value="Апартамент А14б">Апартамент A14б</option>
+                            <option value="Студио Б22">Студио Б22</option>
+                            <!-- Add more options for each apartment -->
+                        </select>
+                    </div>
+
+                    <!-- Custom Message Field -->
+                    <div class="lg:col-span-4">
+                        <label for="customMessage" class="block text-sm font-medium text-gray-700">Допълнително съобщение</label>
+                        <textarea id="customMessage" name="customMessage" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" rows="4"></textarea>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="lg:col-span-4 text-center">
+                        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                            Заяви цена
+                        </button>
+                    </div> 
+                </div>
+            </form>
+        </div>
+
+        <!-- Footer -->
+        <footer class="bg-gray-800 text-white mt-8">
+            <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <p>&copy; 2024 Апартаменти и Стаи за гости - "Алекс". Всички права запазени.</p>
+                <div class="flex items-center space-x-4">
+                        <!-- Facebook Link -->
+                    <a href="https://www.facebook.com/Apartments-and-guest-rooms-Alex-%D0%90%D0%BF%D0%B0%D1%80%D1%82%D0%B0%D0%BC%D0%B5%D0%BD%D1%82%D0%B8-%D0%B8-%D1%81%D1%82%D0%B0%D0%B8-%D0%B7%D0%B0-%D0%B3%D0%BE%D1%81%D1%82%D0%B8-%D0%90%D0%BB%D0%B5%D0%BA%D1%81-100918492648690" class="social-icon">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <!-- Instagram Link -->
+                    <a href="https://instagram.com/alexguest_rooms?igshid=YmMyMTA2M2Y=" class="social-icon">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <!--<a href="#" class="hover:text-gray-400">Privacy Policy</a>
+                    <a href="#" class="hover:text-gray-400">Terms of Service</a>
+                    <a href="#" class="hover:text-gray-400">Contact Us</a>-->
+                </div>
+            </div>
+            </div>
+        </footer>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+
+               
+                  // Function to set the selected room
+                function setSelectedRoom(roomId) {
+                    localStorage.setItem('selectedRoom', roomId);
+                    updateGalleryContent(roomId);
+                }
+
+                // Function to update gallery content based on the selected room
+                function updateGalleryContent(selectedRoom) {
+                // Paths for images for each room. Update this with actual paths.
+                const imagePaths = {
+                  'Студио А18': [
+                        'rooms/A18/1D4DD7B7-D1D9-4641-A014-9B64548D2667.JPEG', 
+                        'rooms/A18/3AC39253-5744-43C4-960A-2D0BA8FBE927.JPEG', 
+                        'rooms/A18/5C2B1C8C-36BB-482F-98DB-C108D4728E17.JPEG', 
+                        'rooms/A18/5F21E663-D6BD-4A39-A4E8-4F04C3B7A687.JPEG',
+                        'rooms/A18/9E6D1F1F-7EA7-4CF6-A41A-B9C5E2B6D0E0.JPEG',
+                        'rooms/A18/CBB2E46D-0054-4CC1-96F8-3407A1CDBD72.JPEG',
+                        'rooms/A18/D6ABECF1-58DA-49DC-ACEA-C6A02F60B808.JPEG',
+                        'rooms/A18/DCE767D8-3B96-4B07-81BF-CA05C5C08DFA.JPEG',
+                        'rooms/A18/F3BF6411-2A62-453E-B5A8-B1F76A877297.JPEG',
+
+                  ],
+                  'Студио А25': [
+                        'rooms/A25/79E07EAB-4CC6-452B-BAA9-607CFB06AE35.JPEG', 
+                        'rooms/A25/6671A28C-3BC6-43A3-A4A4-E4BCC0435B65.JPEG', 
+                        'rooms/A25/0571445E-A3DE-4B72-8EAA-7C8CF3DC25CE.JPEG', 
+                        'rooms/A25/D4BF8D55-C7FE-48C3-AC7A-D7F6E4EE06B0.JPEG',
+                        'rooms/A25/D18C91BC-7621-43A6-A27D-6A0D1719C63E.JPEG',
+                        'rooms/A25/E2954ACB-042E-4102-988E-EBDE74B7904A.JPEG',
+                        'rooms/A25/ECD39B55-1BE9-4879-B4C5-3BE7D17D32F9.JPEG',
+                        'rooms/A25/IMG_1640.JPG',
+                        'rooms/A25/IMG_1642.JPG',
+                  ],
+                  'Студио A28a': [
+                        'rooms/A28a/9A608486-4C7B-4DEC-AB06-17DAD2973488.JPEG', 
+                        'rooms/A28a/895CE348-7E8F-4DF9-858B-F5D0D0B975AE.JPEG', 
+                        'rooms/A28a/47E3CE1E-F3C8-4507-B1EB-535D58BA61FE.JPEG', 
+                        'rooms/A28a/7505CCE8-3742-49C8-802E-DD2D4A150FB8.JPEG',
+                        'rooms/A28a/5668010B-8468-4C24-83D7-9F681CFEF8F8.JPEG',
+                        'rooms/A28a/B637B945-1144-4F07-B004-FDDD87D24AD6.JPEG',
+                        'rooms/A28a/EF0B551D-C516-48BE-BE3B-8A2BFE7B3418.JPEG',
+                        'rooms/A28a/IMG_1667.JPG',
+                        'rooms/A28a/416978392.jpeg',
+                  ],
+                  'Апартамент А2': [
+                        'rooms/A2/0ABEBD71-7F74-480E-8B8E-2BC430B3F1FE.JPEG', 
+                        'rooms/A2/007A7F1C-1343-4B7B-AEED-5108FC749662.JPEG', 
+                        'rooms/A2/15B9EF59-B6AC-430A-9ED0-0A84E724B1D3.JPEG', 
+                        'rooms/A2/58040228-155A-4731-B369-5F62F272E1C7.JPEG',
+                        'rooms/A2/BB4F84BB-1FE6-4CAA-AE65-E868C3AAC594.JPEG',
+                        'rooms/A2/D80A57AC-D0A0-40A1-AB79-244267FEA7D9.JPEG',
+                        'rooms/A2/E68AA2CB-4BF6-42E2-AEB2-1B58262FB47D.JPEG',
+                        'rooms/A2/F84DB74F-322E-4A17-B77E-2ECBE45FA313.JPEG',
+                        'rooms/A2/FA98D8B2-DA0A-4228-9AD8-00D330519071.JPEG',
+                  ],
+                  'Апартамент A14б':[
+                    'rooms/A14b/426397956.jpg',
+                    'rooms/A14b/426397962.jpg',
+                    'rooms/A14b/426397967.jpg',
+                    'rooms/A14b/426397973.jpg',
+                    'rooms/A14b/426397975.jpg',
+                    'rooms/A14b/426397977.jpg',
+                    'rooms/A14b/426397997.jpg',
+                    'rooms/A14b/426398036.jpg',
+                    'rooms/A14b/426398049.jpg',
+                  ],
+                  'Студио Б22':[
+                    'rooms/B22/515489503.jpg',
+                    'rooms/B22/515489555.jpg',
+                    'rooms/B22/515489735.jpg',
+                    'rooms/B22/515489662.jpg',
+                    'rooms/B22/515489770.jpg',
+                    'rooms/B22/515489892.jpg',
+                    'rooms/B22/515489950.jpg',
+                    'rooms/B22/515490153.jpg',
+                    'rooms/B22/515490212.jpg',
+                  ]
+                  // Add more room IDs and their respective image arrays
+                  // ...
+                };
+          
+
+                const images = imagePaths[selectedRoom] || []; // Fallback to an empty array if room ID not found
+                const galleryImages = document.querySelectorAll('.grid img[onclick="openModal(this)"]');
+
+                galleryImages.forEach((img, index) => {
+                    if (images[index]) {
+                        img.src = images[index];
+                        img.alt = `View ${index + 1}`; // Update the alt text for accessibility
+                    }
+                });
+
+                // Update the <h1> element's text
+                const h1Element = document.querySelector('h2');
+                if (h1Element) {
+                    h1Element.textContent = 'Делукс ' + selectedRoom;
+                }
+
+                // Toggle visibility using ternary operator
+                const balconyInfo = document.getElementById('balconyInfo');
+                const fireplaceInfo = document.getElementById('fireplaceInfo');
+                const kitchenInfo = document.getElementById('kitchenInfo');
+
+                balconyInfo.style.display = selectedRoom === 'Студио A28a' ? 'flex' : 'none';
+                fireplaceInfo.style.display = selectedRoom === 'Студио A28a' ? 'none' : 'flex';
+                kitchenInfo.style.display = selectedRoom === 'Студио A28a' ? 'none' : 'flex';
+            }
+
+            // Get the selected room from localStorage
+            const selectedRoom = localStorage.getItem('selectedRoom');
+            if (selectedRoom) {
+                updateGalleryContent(selectedRoom);
+            }
+
+            // Expose setSelectedRoom to the global scope so it can be called from onclick
+            window.setSelectedRoom = setSelectedRoom;
+            });
+          </script>
+
+          <script>
+                document.getElementById('burger').addEventListener('click', function() {
+                    document.body.classList.toggle('open');
+                });
+
+                document.getElementById('overlay').addEventListener('click', function() {
+                    document.body.classList.remove('open');
+                });
+          </script>
+
+  <script>
+        // JavaScript for modal and form submission
+        document.getElementById('reservationForm').onsubmit = function(event) {
+            event.preventDefault();
+
+            // Construct the email link
+            var mailto_link = 'mailto:alexguestrooms@gmail.com?subject=Reservation Request from Webpage&body=' +
+                'Apartment: ' + encodeURIComponent(document.getElementById('apartment-selection').value) + '%0A' +
+                'Check-in Date: ' + encodeURIComponent(document.getElementById('checkin-date').value) + '%0A' +
+                'Check-out Date: ' + encodeURIComponent(document.getElementById('checkout-date').value) + '%0A' +
+                'Adults: ' + encodeURIComponent(document.getElementById('adults').value) + '%0A' +
+                'Children: ' + encodeURIComponent(document.getElementById('children').value) + '%0A' +
+                'Name: ' + encodeURIComponent(document.getElementById('name').value) + '%0A' +
+                'Email: ' + encodeURIComponent(document.getElementById('email').value) + '%0A' +
+                'Phone: ' + encodeURIComponent(document.getElementById('phone').value) + '%0A' +
+                'Message: ' + encodeURIComponent(document.getElementById('customMessage').value);
+
+            // Open the default email client with the constructed email link
+            window.location.href = mailto_link;
+        }
+    </script>
+
+    <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const overlay = document.querySelector('.overlay');
+                const overlayImage = document.querySelector('.overlay-content');
+                const images = document.querySelectorAll('img[onclick="openModal(this)"]');
+                const closeButton = document.querySelector('.close-button'); // Select the close button
+                let currentImageIndex = 0;
+
+                images.forEach((img, index) => {
+                    img.addEventListener('click', function() {
+                        overlayImage.src = this.src;
+                        overlay.classList.remove('hidden');
+                        currentImageIndex = index;
+                    });
+                });
+
+                document.querySelector('.prev-button').addEventListener('click', function() {
+                    currentImageIndex = (currentImageIndex + images.length - 1) % images.length;
+                    overlayImage.src = images[currentImageIndex].src;
+                });
+
+                document.querySelector('.next-button').addEventListener('click', function() {
+                    currentImageIndex = (currentImageIndex + 1) % images.length;
+                    overlayImage.src = images[currentImageIndex].src;
+                });
+
+                closeButton.addEventListener('click', function() {
+                    overlay.classList.add('hidden'); // Hide the overlay when close button is clicked
+                });
+
+                overlay.addEventListener('click', function(e) {
+                    if (e.target === this) {
+                        overlay.classList.add('hidden');
+                    }
+                });
+            });
+    </script>
+</body>
+</html>

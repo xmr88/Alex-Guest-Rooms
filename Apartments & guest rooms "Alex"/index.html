@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html class="no-js" lang="zxx">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Апартаменти и Стаи за гости Алекс</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="img/xfavicon.png.pagespeed.ic.hW7RnoFeGA.webp"/>
+    <link rel="stylesheet" href="css/reservation.css" />
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+      integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"/>
+      <style>
+        .dropdown {
+          position: relative;
+          display: inline-block;
+        }
+        
+        .dropdown-content{
+          display: none;
+          position: absolute;
+          background-color: #f9f9f9;
+          min-width: 160px;
+          box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+          padding: 12px 16px;
+          z-index: 1;
+        }
+        
+        .dropdown:hover .dropdown-content {
+          display: block;
+        }
+      </style>
+  </head>
+  <body>
+    <header>
+      <div class="header-area">
+        <div id="sticky-header" class="main-header-area">
+          <div class="container-fluid p-0">
+            <div class="row align-items-center no-gutters">
+              <div class="col-xl-5 col-lg-6">
+                <div class="main-menu d-none d-lg-block">
+                  <nav>
+
+
+
+                    <ul id="navigation">
+                      <li><a class="active" href="index.html">Начало</a></li>
+
+                      <li><a href="#about-us">За нас</a></li>
+
+                      <li><a href="#visit-rooms">Апартаменти</a></li>
+
+                      <div class="dropdown">
+                        <span style="color:#fff; font-weight:bold;">Контакти</span> 
+                        <div class="dropdown-content">
+                          <p><a href="tel:+359879200355">Обадете се</a></p>
+                          <p><a href="mailto:alexguestrooms@gmail.com">Изпратете мейл</a></p>
+                        </div>
+                      
+                      </div>
+                      
+                    </ul>
+                  </nav>
+                </div>
+              </div>
+              <div class="col-xl-2 col-lg-2">
+                <div class="logo-img">
+                  <a href="index.html"> </a>
+                </div>
+              </div>
+
+              <!-- Swap Language Func 
+              <script>
+                  function RemoveActiveEn() {
+                    var langBg = document.getElementById("lang-bg");
+                    var langBg2 = document.getElementById("lang-bg-2");
+                    var langEn = document.getElementById("lang-en");
+                    var langEn2 = document.getElementById("lang-en-2");
+
+                    langEn.classList.remove("active-lang");
+                    langEn2.classList.remove("active-lang");
+
+                    langBg.classList.add("active-lang");
+                    langBg2.classList.add("active-lang");
+                  }
+                  function RemoveActiveBg(){
+                    var langBg = document.getElementById("lang-bg");
+                    var langBg2 = document.getElementById("lang-bg-2");
+                    var langEn = document.getElementById("lang-en");
+                    var langEn2 = document.getElementById("lang-en-2");
+
+
+                    langBg.classList.remove("active-lang");
+                    langBg2.classList.remove("active-lang");
+
+                    langEn.classList.add("active-lang");
+                    langEn2.classList.add("active-lang");
+                  }
+              </script>-->
+
+              <div class="col-xl-4 col-lg-4 d-none d-lg-block">
+                <div class="book_room">
+                  <div class="socail_links">
+                    <ul>
+                      <li>
+                        <a
+                          href="https://www.facebook.com/Apartments-and-guest-rooms-Alex-%D0%90%D0%BF%D0%B0%D1%80%D1%82%D0%B0%D0%BC%D0%B5%D0%BD%D1%82%D0%B8-%D0%B8-%D1%81%D1%82%D0%B0%D0%B8-%D0%B7%D0%B0-%D0%B3%D0%BE%D1%81%D1%82%D0%B8-%D0%90%D0%BB%D0%B5%D0%BA%D1%81-100918492648690"
+                        >
+                          <i class="fa fa-facebook-square"></i>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="https://instagram.com/alexguest_rooms?igshid=YmMyMTA2M2Y=">
+                          <i class="fa fa-instagram"></i>
+                        </a>
+                      </li>
+                      <li id="lang-bg" class="active-lang">
+                        <a onclick="RemoveActiveEn()" href="#"
+                          ><img
+                            class="img-ico"
+                            src="https://img.icons8.com/color/48/000000/bulgaria.png"
+                        /></a>
+                      </li>
+                      <!--<li class="active-lang" id="lang-en">
+                        <a onclick="RemoveActiveBg()" href="#"><img class="img-ico" src="https://img.icons8.com/color/48/000000/great-britain.png" /></a>
+                      </li>-->
+                    </ul>
+                  </div>
+                  <div class="book_btn d-none d-lg-block">
+                    <a class="popup-with-form" href="gallery.html#booking"
+                      >Резервирай</a
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="mobile_menu d-block d-lg-none"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="video_area h-area overlay">
+      <div class="video_area_inner text-center">
+        <span>Изглед към Родопа планина</span>
+        <h3>
+          Апартаменти и стаи <br />
+          за гости Алекс
+        </h3>
+      </div>
+    </div>
+
+    <div id="about-us" class="about_area">
+      <div class="container">
+        <div class="row">
+          <div class="col-xl-5 col-lg-5">
+            <div class="about_info">
+              <div class="section_title mb-20px">
+                <span>За нас</span>
+                <h2>
+                  Нашите луксозни стаи <br />
+                  в сърцето на природата
+                </h2>
+              </div>
+              <p>
+                Нашите помещения за настаняване са подходящи, както за двойки
+                така и за семейства. Те разполагат с всичко необходимо за вашият уют и комфорт по време на престоя ви! Заповядайте и си подарете незабравима
+                почивка в сърцето на Родопите!
+              </p>
+              <!-- <a href="#" class="line-button">Learn More</a>-->
+            </div>
+          </div>
+          <div class="col-xl-7 col-lg-7">
+            <div class="about_thumb d-flex">
+              <div class="img_1">
+                <img
+                  class="fix-img-1"
+                  src="rooms/Hotel/IMG_1680.JPG"
+                  alt=""
+                  data-pagespeed-url-hash="670561338"
+                  onload="pagespeed.CriticalImages.checkImageForCriticality(this);"
+                />
+              </div>
+              <div class="img_2">
+                <img
+                  class="fix-img-2"
+                  src="rooms/A18/CBB2E46D-0054-4CC1-96F8-3407A1CDBD72.JPEG"
+                  alt=""
+                  data-pagespeed-url-hash="965061259"
+                  onload="pagespeed.CriticalImages.checkImageForCriticality(this);"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="offers_area">
+      <div class="container">
+        <div class="row">
+          <div class="col-xl-12">
+            <div class="section_title text-center mb-100">
+              <span>Нашите оферти</span>
+              <h3>Текущи оферти</h3>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xl-4 col-md-4">
+            <div class="single_offers">
+              <div class="about_thumb">
+                <img
+                  src="img/offers/Oak2Only2022Web1024x1024_620x.webp"
+                  alt=""
+                  data-pagespeed-url-hash="900117794"
+                  onload="pagespeed.CriticalImages.checkImageForCriticality(this);"
+                />
+              </div>
+              <h3>Кош с дърва за камината</h3>
+              <ul>
+                <li>За информация за цената на коша моля позвънете</li>
+                <li>Всеки следващ се заплаща допълнително</li>
+                <!--<li>Sea view side</li>-->
+              </ul>
+              <!--<a href="#" class="book_now">book now</a>-->
+            </div>
+          </div>
+          <div class="col-xl-4 col-md-4">
+            <div class="single_offers">
+              <div class="about_thumb">
+                <img
+                  src="img/offers/res_ebcca336373a91e3240124c3740bcd86.webp"
+                  alt=""
+                  data-pagespeed-url-hash="1194617715"
+                  onload="pagespeed.CriticalImages.checkImageForCriticality(this);"
+                />
+              </div>
+              <h3>Детско легълце</h3>
+              <ul>
+                <li>При предварително поискване</li>
+                <li>Налично за всеки апартамент</li>
+                <li>Напълно безплатно</li>
+              </ul>
+              <!--<a href="#" class="book_now">book now</a>-->
+            </div>
+          </div>
+          <div class="col-xl-4 col-md-4">
+            <div class="single_offers">
+              <div class="about_thumb">
+                <img
+                  src="img/offer3.jpeg"
+                  alt=""
+                  data-pagespeed-url-hash="1489117636"
+                  onload="pagespeed.CriticalImages.checkImageForCriticality(this);"
+                />
+              </div>
+              <h3>
+                Летни преходи в гр.Смолян и <br />
+                покрайнините
+              </h3>
+              <ul>
+                <li>При предварителна уговорка на посочените контакти</li>
+                <li>Предлага се само за летния сезон</li>
+              </ul>
+              <!--<a href="#" class="book_now">book now</a>-->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="video_area video_bg overlay">
+      <video autoplay muted loop id="myVideo">
+          <source src="img/video/video.mp4" type="video/mp4">
+          Your browser does not support HTML5 video.
+      </video>
+      <div class="video_area_inner text-center">
+          <h3>
+              Отпуснете се и се насладете на вашата <br>
+              почивка в Пампорово
+          </h3>
+      </div>
+    </div>
+
+    <div class="about_area">
+      <div class="container">
+        <div class="row">
+          <div class="col-xl-7 col-lg-7">
+            <div class="about_thumb2 d-flex">
+              <div class="img_1">
+                <img
+                  src="rooms/A25/IMG_1642.JPG"
+                  alt=""
+                  data-pagespeed-url-hash="2611809332"
+                  onload="pagespeed.CriticalImages.checkImageForCriticality(this);"
+                />
+              </div>
+              <div class="img_2">
+                <img
+                  src="rooms/Hotel/305922684_1401086220I63010_8819343205724055867_n.jpeg"
+                  alt=""
+                  data-pagespeed-url-hash="2906309253"
+                  onload="pagespeed.CriticalImages.checkImageForCriticality(this);"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-5 col-lg-5">
+            <div class="about_info">
+              <div class="section_title mb-20px">
+                <span>Уют и спокойствие</span>
+                <h2>
+                  Пригответе си вкусна храна<br />
+                  и се насладете на природата
+                </h2>
+              </div>
+              <p>
+                При нас атмосферата е уютна, топла и приятна! В нашите апартаменти вие
+                можете да се почувствате като у дома си! Запалена камина и топла
+                вечеря, която може да си приготвите в напълно оборудвана кухня с
+                всичко необходимо за вашето удобство и се насладете на вашата
+                почивка.
+              </p>
+              <!-- <a href="#" class="line-button">Learn More</a>-->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="visit-rooms" class="features_room">
+      <div class="container">
+        <div class="row">
+          <div class="col-xl-12">
+            <div class="section_title text-center mb-100">
+              <span>Налични апартаменти и стаи</span>
+              <h3>Изберете вашият почивен Апартамент <br />или Студио</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="rooms_here">
+        <div class="single_rooms" onclick="window.location.href = 'gallery.html?room=Студио А18';">
+              <div class="room_thumb">
+                  <img src="rooms/A18/9E6D1F1F-7EA7-4CF6-A41A-B9C5E2B6D0E0.JPEG" alt="Deluxe Studio A25"
+                       data-pagespeed-url-hash="3251671619"
+                       onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
+                  <div class="room_heading d-flex justify-content-between align-items-center">
+                      <div class="room_heading_inner">
+                         <!--<span>За цени моля обадете се на посочения телефон</span>-->
+                          <h3>Делукс Студио А18</h3>
+                      </div>
+                      <a href="tel:+359879200355" class="line-button">Разгледай</a>
+                  </div>
+              </div>
+          </div>
+  
+          <div class="single_rooms" onclick="window.location.href = 'gallery.html?room=Студио А25';">
+            <div class="room_thumb">
+              <img
+                src="rooms/A25/6671A28C-3BC6-43A3-A4A4-E4BCC0435B65.JPEG"
+                alt=""
+                data-pagespeed-url-hash="3546171540"
+                onload="pagespeed.CriticalImages.checkImageForCriticality(this);"
+              />
+                <div class="room_heading d-flex justify-content-between align-items-center">
+                  <div class="room_heading_inner">
+                    <!--<span>За цени моля обадете се на посочения телефон</span>-->
+                    <h3>Делукс Студио А25</h3>
+                  </div>
+                  <a href="tel:+359879200355" class="line-button">Разгледай</a>
+                </div>
+            </div>
+          </div>
+
+        <div class="single_rooms" onclick="window.location.href = 'gallery.html?room=Студио A28a';">
+          <div class="room_thumb">
+            <img
+              class="delux-room-fix"
+              src="rooms/A28a/47E3CE1E-F3C8-4507-B1EB-535D58BA61FE.JPEG"
+              alt=""
+              data-pagespeed-url-hash="3840671461"
+              onload="pagespeed.CriticalImages.checkImageForCriticality(this);"
+            />
+            <div
+              class="room_heading d-flex justify-content-between align-items-center"
+            >
+              <div class="room_heading_inner">
+                <!--<span>За цени моля обадете се на посочения телефон</span>-->
+                <h3>Делукс Студио с балкон А28а </h3>
+              </div>
+              <a href="tel:+359879200355" class="line-button">Разгледай</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="single_rooms" onclick="window.location.href = 'gallery.html?room=Апартамент А2';">
+          <div class="room_thumb">
+            <img
+              class="delux-room-fix"
+              src="rooms/A2/BB4F84BB-1FE6-4CAA-AE65-E868C3AAC594.JPEG"
+              alt=""
+              data-pagespeed-url-hash="4135171382"
+              onload="pagespeed.CriticalImages.checkImageForCriticality(this);"
+            />
+            <div
+              class="room_heading d-flex justify-content-between align-items-center"
+            >
+              <div class="room_heading_inner">
+                <!--<span>За цени моля обадете се на посочения телефон</span>-->
+                <h3>Делукс Апартамент А2</h3>
+              </div>
+              <a href="tel:+359879200355" class="line-button">Разгледай</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="single_rooms" onclick="window.location.href = 'gallery.html?room=Студио Б22';">
+          <div class="room_thumb">
+            <img
+              class="delux-room-fix"
+              src="rooms/B22/515489950.jpg"
+              alt=""
+              data-pagespeed-url-hash="4135171382"
+              onload="pagespeed.CriticalImages.checkImageForCriticality(this);"
+            />
+            <div
+              class="room_heading d-flex justify-content-between align-items-center"
+            >
+              <div class="room_heading_inner">
+                <!--<span>За цени моля обадете се на посочения телефон</span>-->
+                <h3>Делукс Студио Б22</h3>
+              </div>
+              <a href="tel:+359879200355" class="line-button">Разгледай</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="single_rooms" onclick="window.location.href = 'gallery.html?room=Апартамент A14б';">
+          <div class="room_thumb">
+            <img
+              class="delux-room-fix"
+              src="rooms/A14b/426397962.jpg"
+              alt=""
+              data-pagespeed-url-hash="4135171382"
+              onload="pagespeed.CriticalImages.checkImageForCriticality(this);"
+            />
+            <div
+              class="room_heading d-flex justify-content-between align-items-center"
+            >
+              <div class="room_heading_inner">
+                <!--<span>За цени моля обадете се на посочения телефон</span>-->
+                <h3>Делукс Апартамент А14б</h3>
+              </div>
+              <a href="tel:+359879200355" class="line-button">Разгледай</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+        </div>
+      </div>
+    </div>
+    <footer class="footer">
+      <div class="footer_top">
+        <div class="container">
+          <div class="row">
+            <div class="col-xl-4 col-md-6 col-lg-4">
+              <div class="footer_widget">
+                <h3 class="footer_title">Адрес:</h3>
+                <p class="footer_text">
+                  Пампорово, ул. 19, <br>4871 Пампорово
+                </p>
+                <a
+                  href="https://goo.gl/maps/TFAWE6dTkK3Z3YYcA"
+                  class="line-button"
+                  >Покажи на картата</a
+                >
+              </div>
+            </div>
+            <div class="col-xl-3 col-md-6 col-lg-4">
+              <div class="footer_widget">
+                <h3 class="footer_title">За резерваций</h3>
+                <p class="footer_text">
+                  <a style="color:beige" href="tel:+359879200355">+359 879 200 355</a> <br />
+                   <a style="color:beige" href="mailto:alexguestrooms@gmail.com">alexguestrooms@gmail.com</a>
+                </p>
+              </div>
+            </div>
+            <div class="col-xl-4 col-md-6 col-lg-4">
+              <div class="footer_widget">
+                <h3 class="footer_title">Меню</h3>
+                <ul>
+                  <ul id="navigation">
+                  <li><a href="index.html">Начало</a></li>
+                  <li><a href="#visit-rooms">Апартаменти</a></li>
+                  <li><a href="#about-us">За нас</a></li>
+                  <li><a href="https://goo.gl/maps/TFAWE6dTkK3Z3YYcA">Оценете вашият престой</a> </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="copy-right_text">
+        <div class="container">
+          <div class="footer_border"></div>
+          <div class="row">
+            <div class="col-xl-8 col-md-7 col-lg-9">
+              <p class="copy_right">
+                Copyright &copy;
+                <script
+                  data-cfasync="false"
+                  src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"
+                ></script>
+                <script>
+                  document.write(new Date().getFullYear());
+                </script>
+                Всички права запазени | Този сайт бе направен от
+                <a
+                  href="https://instagram.com/_just.khalid_?igshid=YmMyMTA2M2Y="
+                  target="_blank"
+                >
+                  Халид Хасанлиев</a
+                >
+              </p>
+            </div>
+
+            <div class="col-xl-4 col-md-5 col-lg-3">
+              <div class="socail_links">
+                <ul>
+                  <li>
+                    <a
+                      href="https://www.facebook.com/Apartments-and-guest-rooms-Alex-%D0%90%D0%BF%D0%B0%D1%80%D1%82%D0%B0%D0%BC%D0%B5%D0%BD%D1%82%D0%B8-%D0%B8-%D1%81%D1%82%D0%B0%D0%B8-%D0%B7%D0%B0-%D0%B3%D0%BE%D1%81%D1%82%D0%B8-%D0%90%D0%BB%D0%B5%D0%BA%D1%81-100918492648690"
+                    >
+                      <i class="fa fa-facebook-square"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="https://instagram.com/alexguest_rooms?igshid=YmMyMTA2M2Y=">
+                      <i class="fa fa-instagram"></i>
+                    </a>
+                  </li>
+                  <li id="lang-bg-2" class="active-lang">
+                    <a onclick="RemoveActiveEn()" href="#"
+                      ><img
+                        class="img-ico"
+                        src="https://img.icons8.com/color/48/000000/bulgaria.png"
+                    /></a>
+                  </li>
+                  <!--<li class="active-lang" id="lang-en-2">
+                    <a onclick="RemoveActiveBg()" href="#"><img class="img-ico" src="https://img.icons8.com/color/48/000000/great-britain.png" /></a>
+                  </li>-->
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        // Function to handle click on room thumbnails
+        function handleRoomClick(event, roomId) {
+          event.preventDefault(); // Prevent default link behavior
+          localStorage.setItem('selectedRoom', roomId); // Store room ID in localStorage
+          window.location.href = 'gallery.html'; // Redirect to gallery.html
+        }
+    
+        // Attaching click event listeners to room thumbnails
+        document.querySelectorAll('.single_rooms').forEach(room => {
+          const roomId = room.getAttribute('onclick').match(/room=([^';]+)/)[1];
+          room.addEventListener('click', (event) => handleRoomClick(event, roomId));
+        });
+      });
+    </script>
+    
+    <script src="js/vendor/modernizr-3.5.0.min.js"></script>
+    <script src="js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="js/popper.min.js+bootstrap.min.js.pagespeed.jc.tW5aQhFQ7w.js"></script>
+    <script src="https://use.fontawesome.com/391798fd66.js"></script>
+    <script src="js/owl.carousel.min.js+isotope.pkgd.min.js+ajax-form.js+waypoints.min.js+jquery.counterup.min.js.pagespeed.jc.Fh6lC-7hrT.js"></script>
+    <script src="js/imagesloaded.pkgd.min.js+scrollIt.js+jquery.scrollUp.min.js+wow.min.js+nice-select.min.js+jquery.slicknav.min.js+jquery.magnific-popup.min.js+plugins.js.pagespeed.jc.FU_fc32UtK.js"></script>
+
+    <script src="js/gijgo.min.js"></script>
+    <script src="js/contact.js+jquery.ajaxchimp.min.js+jquery.form.js+jquery.validate.min.js+mail-script.js+main.js.pagespeed.jc.wOnFyld4qq.js"></script>
+   
+    <script
+      defer
+      src="https://static.cloudflareinsights.com/beacon.min.js/v652eace1692a40cfa3763df669d7439c1639079717194"
+      integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw=="
+      data-cf-beacon='{"rayId":"75ba46b49aee9231","token":"cd0b4b3a733644fc843ef0b185f98241","version":"2022.8.1","si":100}'
+      crossorigin="anonymous">
+    </script>
+  </body>
+
+  
+</html>
